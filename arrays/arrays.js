@@ -160,13 +160,6 @@ if(ViejoDaveRestaurant.isOpen){
     document.write(tablesShown);
   }
 
-  function tableIsTaken(tableId){
-    ViejoDaveRestaurant.tables.forEach(table => {
-        if (table.id == tableId) return table.taken = true});
-    console.log(ViejoDaveRestaurant.tables); 
-    document.write(`<br>` + "Usted ha tomado la mesa " + tableId )
-  }
-
   function doNotWantATable(){
 
     const customerToTakeAway =  `<div> 
@@ -213,3 +206,10 @@ if(ViejoDaveRestaurant.isOpen){
  function goodBye(){
     alert("Gracias por venir, vuelva pronto");
  }
+ function tableIsTaken(tableId){
+    ViejoDaveRestaurant.tables.forEach(table => {
+        if (table.id == tableId) return table.taken = true});
+    console.log(ViejoDaveRestaurant.tables); 
+    document.write(`<br>` + "Usted ha tomado la mesa " + tableId )
+    showMenu();
+  }
