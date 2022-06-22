@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.mainBackground{
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: auto 200px   ;
+    grid-template-areas:"header"
+                        "main";
+}
+.imgBackground{
+    background-color: rgb(245 235 252);
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+.header{
+    grid-area: header;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fcfcfc;
+}
+.imgRestaurant{
+    width: 350px;
+} 
+.main{
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 25%;
+}
