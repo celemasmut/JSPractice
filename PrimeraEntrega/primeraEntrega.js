@@ -5,12 +5,32 @@ class Restaurant{
         this.menu = menu;
         this.cashRegister = cashRegister;
         this.isOpen = isOpen;
+        this.customers = [];
     }
 
     openRestaurant(state){
         this.isOpen = state;
     }
+    addCustomer(customer){
+        this.customers.push(customer);
+    }
 }
+
+class Customer{
+    constructor(name,tableId, menu){
+        this.name = name;
+        this.tableId = tableId;
+        this.menu = menu;
+        this.totalToPay = 0;
+    }
+    addMenu(menu){
+        this.menu.push(menu);
+    }
+    refreshTotalToPay(toPay){
+        this.totalToPay += toPay;
+    }
+}
+
 const ViejoDaveTables = [
     {
         id: '1',
@@ -125,18 +145,11 @@ const MahalMenu = [
 const ViejoDaveRestaurant = new Restaurant("Viejo Dave", ViejoDaveTables, ViejoDaveMenu, 10000, false);
 
 ViejoDaveRestaurant.openRestaurant(true);
-let counter = 0;
-const amountOfTablesAvailable = ViejoDaveRestaurant.tables.filter((table) => {
-    if (table.taken == false){
-        counter++;
-    }
-    return counter;
-    }
-);
+const amountOfTablesAvailable = ViejoDaveRestaurant.tables.reduce((result, table) => { table.taken == false ? result++ : ''});
 
 if(ViejoDaveRestaurant.isOpen){
      document.write("Viejo Dave esta abierto");
-     document.write( `<br>` + "Viejo Dave tiene " + counter + " mesas disponibles");
+     document.write( `<br>` + "Viejo Dave tiene " + amountOfTablesAvailable + " mesas disponibles");
     }
  const customerWantATable =  `<div> 
     <br>
@@ -213,3 +226,9 @@ if(ViejoDaveRestaurant.isOpen){
     document.write(`<br>` + "Usted ha tomado la mesa " + tableId )
     showMenu();
   }
+
+  function restaurantSelection(){
+    const restaurantChosen = prompt("Ingresa a \n 1) Viejo Dave \n 2) Mahal");
+    return restaurantChosen;
+  }
+
