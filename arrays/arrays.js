@@ -126,7 +126,7 @@ const ViejoDaveRestaurant = new Restaurant("Viejo Dave", ViejoDaveTables, ViejoD
 
 ViejoDaveRestaurant.openRestaurant(true);
 let counter = 0;
-const amountOfTablesAvailable = ViejoDaveRestaurant.tables.filter((table) => {
+const amountOfTablesAvailable = ViejoDaveRestaurant.tables.forEach((table) => {
     if (table.taken == false){
         counter++;
     }

@@ -145,33 +145,70 @@ const MahalMenu = [
 const ViejoDaveRestaurant = new Restaurant("Viejo Dave", ViejoDaveTables, ViejoDaveMenu, 10000, false);
 
 ViejoDaveRestaurant.openRestaurant(true);
-let result =0;
-debugger;
-const amountOfTablesAvailable = ViejoDaveRestaurant.tables.forEach((table) => { table.taken == false ? result++ : ''});
-if(ViejoDaveRestaurant.isOpen){
-     document.write("Viejo Dave esta abierto");
-     document.write( `<br>` + "Viejo Dave tiene " + amountOfTablesAvailable + " mesas disponibles");
-    }
- const customerWantATable =  `<div> 
-    <br>
-    <button onClick="wantATable()">Si</button>
-    <br>
-    <button onClick="doNotWantATable()">No</button> </div>`;
+let tableCounter = 0;
+ViejoDaveRestaurant.tables.forEach((table) => {
+    table.taken == false && tableCounter++;
+});
+ const restaurantOpen = `
+<div class="col mb-5">
+<div class="card h-100">
+    <!-- Product image-->
+    <img class="card-img-top" src="./assets/img/ViejoDave.jpeg" alt="..." />
+    <!-- Product details-->
+    <div class="card-body p-4">
+        <div class="text-center">
+            <!-- Product name-->
+            <h5 class="fw-bolder">ViejoDave</h5>
+            <p>Tiene ${tableCounter} mesas liberadas</p>
+            
+        </div>
+    </div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="text-center"><a onclick="wantATable()" class="btn btn-outline-dark mt-auto" href="#">Reservar</a></div>
 
-  document.write(`<br>` + "Desea tomar una mesa? " + `<br>` + customerWantATable);
+        <div class="text-center"><a onclick="doNotWantATable()" class="btn btn-outline-dark mt-auto" href="#">Pedir para llevar</a></div>
+    </div>
+</div>
+</div>
+`
+
+
+if(ViejoDaveRestaurant.isOpen){
+    document.getElementById('card-container').innerHTML = restaurantOpen; 
+}
 
   let tablesShown = ``
   function wantATable(){
+
     for(let i = 0; i < ViejoDaveRestaurant.tables.length; i++) {
         if(ViejoDaveRestaurant.tables[i].taken == false){
-            tablesShown +=`<br>` + "La mesa "+ ViejoDaveRestaurant.tables[i].id + 
-            " esta disponible para hasta " + 
-            ViejoDaveRestaurant.tables[i].amountOfChairs + 
-            " personas." + `<button type="button" onClick="tableIsTaken(${
-                ViejoDaveRestaurant.tables[i].id})"> Tomar </button>`;
+            tablesShown += ` <div class="col mb-5">
+            <div class="card h-100">
+                <!-- Product image-->
+                <img class="card-img-top" src="./assets/img/ViejoDave.jpeg" alt="..." />
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">La mesa ${ViejoDaveRestaurant.tables[i].id} </h5>
+                        <p>para hasta ${ViejoDaveRestaurant.tables[i].amountOfChairs} personas</p>
+                        
+                    </div>
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a  onClick="tableIsTaken(${
+                        ViejoDaveRestaurant.tables[i].id})" class="btn btn-outline-dark mt-auto" href="#">Tomar mesa</a></div>
+            
+                </div>
+            </div>
+            </div> `
         }
     }
-    document.write(tablesShown);
+
+    document.getElementById('card-container').innerHTML = tablesShown; 
+
   }
 
   function doNotWantATable(){
@@ -220,12 +257,31 @@ if(ViejoDaveRestaurant.isOpen){
  function goodBye(){
     alert("Gracias por venir, vuelva pronto");
  }
+ let tableTaken = '';
  function tableIsTaken(tableId){
     ViejoDaveRestaurant.tables.forEach(table => {
         if (table.id == tableId) return table.taken = true});
     console.log(ViejoDaveRestaurant.tables); 
-    document.write(`<br>` + "Usted ha tomado la mesa " + tableId )
-    showMenu();
+    tableTaken = ` <div class="col mb-5">
+    <div class="card h-100">
+        <!-- Product image-->
+        <img class="card-img-top" src="./assets/img/user.png" alt="..." />
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Ha tomado mesa ${tableId} </h5>                        
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a  onClick="showMenu()" class="btn btn-outline-dark mt-auto" href="#">Ver Menu</a></div>
+    
+        </div>
+    </div>
+    </div>
+    `
+    document.getElementById('card-container').innerHTML = tableTaken; 
   }
 
   function restaurantSelection(){
