@@ -1,3 +1,37 @@
+class User{
+    constructor(user, password){
+        this.user = user;
+        this.password = password;
+    }
+}
+
+const newUser = new User("celes@coder.com", "1234jaja22");
+const admin = new User("admin@coder.com", "123456789");
+
+//busco el elemento a escuchar
+const logInButton = document.getElementById('logIn-button');
+logInButton.disabled = true;
+//setear el escuchador de eventos
+
+logInButton.onclick = () => {
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("password").value;
+
+}
+
+document.getElementById("password").oninput = buttonChange;
+document.getElementById("user").oninput = buttonChange;
+
+
+function buttonChange (){
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("password").value;
+    if(user && pass){
+        logInButton.disabled = false;
+    }
+
+}
+
 class Restaurant{
     constructor(name,tables, menu,cashRegister, isOpen){
         this.name = name;

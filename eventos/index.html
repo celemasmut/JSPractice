@@ -34,11 +34,22 @@
                             </ul>
                         </li>
                     </ul>
+                    <form action="#">
+                        <div>
+                            <label for="">Usuario</label>
+                            <input type="email" required maxlength="50" id="user">
+                        </div>
+                        <div>
+                            <label for="">Contraseña</label>
+                            <input type="password" required maxlength="20" minlength="6" id="password">
+                        </div>
+                        <button id="logIn-button" type="submit" class="btn btn-primary">Log in</button>
+                    </form>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">100</span>
                         </button>
                     </form>
                 </div>
