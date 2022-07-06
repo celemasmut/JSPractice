@@ -13,7 +13,7 @@ const ingresos = [
 ];
 
 const egresos = [
-    new Egreso('Renta',678.00),
+    new Egreso('Renta',8888.00),
     new Egreso('Ropa',346.00)
 ];
 
@@ -68,24 +68,75 @@ const cargarIngresos = ()=> {
 const cargarEgresos = ()=> {
     let egresosHTML = '';
     egresos.forEach((egreso) => {
-        egresosHTML += crearIngresoHTML(egreso);
+        egresosHTML += crearEgresoHTML(egreso);
     })
     egresosList.innerHTML = egresosHTML;
 }
 
-const crearIngresoHTML = (transaccion) => {
+const crearIngresoHTML = (ingreso) => {
     let ingresoHTML = `
     <div class="elemento limpiarEstilos">
-        <div class="elemento_descripcion">${transaccion.descripcion}</div>
+        <div class="elemento_descripcion">${ingreso.descripcion}</div>
         <div class="derecha limpiarEstilos">
-            <div class="elemento_valor">${formatoMoneda(transaccion.valor)}</div>
+            <div class="elemento_valor">${formatoMoneda(ingreso.valor)}</div>
             <div class="elemento_eliminar">
                 <button class="elemento_eliminar--btn">
-                    <ion-icon name="close-outline"></ion-icon>
+                    <ion-icon name="close-outline"
+                     onclick='eliminarIngreso(${ingreso.id})'></ion-icon>
                 </button>
             </div>
         </div>
     </div>
     `;
     return ingresoHTML;
+}
+const crearEgresoHTML = (egreso) => {
+    let egresoHTML = `
+    <div class="elemento limpiarEstilos">
+        <div class="elemento_descripcion">${egreso.descripcion}</div>
+        <div class="derecha limpiarEstilos">
+            <div class="elemento_valor">${formatoMoneda(egreso.valor)}</div>
+            <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor / totalEgresos())}</div>
+            <div class="elemento_eliminar">
+                <button class="elemento_eliminar--btn">
+                    <ion-icon name="close-outline" 
+                     onclick='eliminarEgreso(${egreso.id})' ></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    `;
+    return egresoHTML;
+}
+
+const eliminarIngreso = (ingresoId) =>{
+    const indiceEliminar = ingresos.findIndex(ingreso =>ingreso.id === ingresoId);
+    ingresos.splice(indiceEliminar,1);
+    cargarCabecero();
+    cargarIngresos();
+}
+
+const eliminarEgreso = (egresoId) =>{
+    const indiceEliminar = egresos.findIndex(egreso =>egreso.id === egresoId);
+    egresos.splice(indiceEliminar,1);
+    cargarCabecero();
+    cargarEgresos();
+}
+
+const agregarDato = ()=> {
+    const form = document.forms['form'];
+    const tipo = form ['tipo'];
+    const descripcion = form ['descripcion'];
+    const valor = form ['valor'];
+    if(descripcion.value !== '' && valor.value !== ''){
+        if(tipo.value === 'ingreso'){
+            ingresos.push(new Ingreso(descripcion.value, Number(valor.value)));
+            cargarCabecero();
+            cargarIngresos();
+        }else if(tipo.value === 'egreso'){
+            egresos.push(new Egreso(descripcion.value, Number(valor.value)));
+            cargarCabecero();
+            cargarEgresos();
+        }
+    }
 }
