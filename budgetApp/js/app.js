@@ -6,16 +6,11 @@ const misEgresos = document.getElementById('egresos');
 const ingresosList = document.getElementById('lista-ingresos');
 const egresosList = document.getElementById('lista-egresos');
 
+const ingresosStorages = localStorage.getItem('ingresos');
+const egresosStorages = localStorage.getItem('egresos');
+const ingresos = JSON.parse(ingresosStorages) ?? [];
 
-const ingresos = [
-    new Ingreso('Salario',5654.00),
-    new Ingreso('Venta de coche',1500.00)
-];
-
-const egresos = [
-    new Egreso('Renta',8888.00),
-    new Egreso('Ropa',346.00)
-];
+const egresos = JSON.parse(egresosStorages) ?? [];
 
 let cargarApp = ()=> {
     cargarCabecero();
@@ -26,7 +21,9 @@ let cargarApp = ()=> {
 let totalIngresos = ()=> {
     let totalIngreso =0;
     ingresos.forEach((ingreso) => {
-        totalIngreso += ingreso.valor;
+        totalIngreso = totalIngreso +ingreso.valor;
+        console.log("ingreso valor: " + ingreso.valor);
+        console.log("total ingreso: " + totalIngreso);
     })
     return totalIngreso;
 }
@@ -40,7 +37,6 @@ let totalEgresos = ()=> {
 }
 
 let cargarCabecero = ()=>{
-    debugger;
     let presupuesto = totalIngresos() - totalEgresos();
     let porcentajeEgresos = totalEgresos()/totalIngresos();
     actualPresupuesto.innerHTML = formatoMoneda(presupuesto); 
@@ -131,10 +127,12 @@ const agregarDato = ()=> {
     if(descripcion.value !== '' && valor.value !== ''){
         if(tipo.value === 'ingreso'){
             ingresos.push(new Ingreso(descripcion.value, Number(valor.value)));
+            localStorage.setItem('ingresos', JSON.stringify(ingresos));
             cargarCabecero();
             cargarIngresos();
         }else if(tipo.value === 'egreso'){
             egresos.push(new Egreso(descripcion.value, Number(valor.value)));
+            localStorage.setItem('egresos', JSON.stringify(egresos));
             cargarCabecero();
             cargarEgresos();
         }
