@@ -106,20 +106,66 @@ const crearEgresoHTML = (egreso) => {
 }
 
 const eliminarIngreso = (ingresoId) =>{
-    const indiceEliminar = ingresos.findIndex(ingreso =>ingreso.id === ingresoId);
-    ingresos.splice(indiceEliminar,1);
-    cargarCabecero();
-    cargarIngresos();
+    Swal.fire({
+        title: 'Are you sure you want to delete the description?',
+        icon: 'warning',
+        confirmButtonText: 'Cool',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      
+      }).then((result) => {
+        if(result.isConfirmed){
+            Swal.fire({ 
+                title:'Deleted!',
+                text:'Your description has been deleted.',
+                icon:'success',
+                timer:1500,
+                showConfirmButton: false,
+            })
+            const indiceEliminar = ingresos.findIndex(ingreso =>ingreso.id === ingresoId);
+            ingresos.splice(indiceEliminar,1);
+            cargarCabecero();
+            cargarIngresos();
+        }
+    })
 }
 
 const eliminarEgreso = (egresoId) =>{
-    const indiceEliminar = egresos.findIndex(egreso =>egreso.id === egresoId);
-    egresos.splice(indiceEliminar,1);
-    cargarCabecero();
-    cargarEgresos();
+    Swal.fire({
+        title: 'Are you sure you want to delete the description?',
+        icon: 'warning',
+        confirmButtonText: 'Cool',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      
+      }).then((result) => {
+        if(result.isConfirmed){
+            Swal.fire({ 
+                title:'Deleted!',
+                text:'Your description has been deleted.',
+                icon:'success',
+                timer:1500,
+                showConfirmButton: false,
+            })
+            const indiceEliminar = egresos.findIndex(egreso =>egreso.id === egresoId);
+            egresos.splice(indiceEliminar,1);
+            cargarCabecero();
+            cargarEgresos();
+        }
+    })
 }
 
 const agregarDato = ()=> {
+    Swal.fire({
+        title: 'Congrats!',
+        text: 'you add a new description',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      })
     const form = document.forms['form'];
     const tipo = form ['tipo'];
     const descripcion = form ['descripcion'];
