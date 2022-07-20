@@ -117,11 +117,13 @@ const eliminarIngreso = (ingresoId) =>{
       
       }).then((result) => {
         if(result.isConfirmed){
-            Swal.fire(
-                'Deleted!',
-                'Your description has been deleted.',
-                'success'
-              )
+            Swal.fire({ 
+                title:'Deleted!',
+                text:'Your description has been deleted.',
+                icon:'success',
+                timer:1500,
+                showConfirmButton: false,
+            })
             const indiceEliminar = ingresos.findIndex(ingreso =>ingreso.id === ingresoId);
             ingresos.splice(indiceEliminar,1);
             cargarCabecero();
@@ -142,11 +144,13 @@ const eliminarEgreso = (egresoId) =>{
       
       }).then((result) => {
         if(result.isConfirmed){
-            Swal.fire(
-                'Deleted!',
-                'Your description has been deleted.',
-                'success'
-              )
+            Swal.fire({ 
+                title:'Deleted!',
+                text:'Your description has been deleted.',
+                icon:'success',
+                timer:1500,
+                showConfirmButton: false,
+            })
             const indiceEliminar = egresos.findIndex(egreso =>egreso.id === egresoId);
             egresos.splice(indiceEliminar,1);
             cargarCabecero();
