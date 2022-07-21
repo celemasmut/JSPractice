@@ -186,12 +186,13 @@ const agregarDato = ()=> {
 }
 const API_URL = 'https://api.bluelytics.com.ar/';
 const endPointDolarBlue = 'v2/latest';
-
+let dolarBlue = [];
 const obtenerDatosDolar = () => {
     fetch(API_URL + endPointDolarBlue)
     .then((response) => response.json())
     .then((responseData) => {
-        console.log(responseData)
+        console.log(responseData);
+        dolarBlue = responseData.blue;
     });
 }
 obtenerDatosDolar();  
