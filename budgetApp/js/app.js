@@ -184,3 +184,14 @@ const agregarDato = ()=> {
         }
     }
 }
+const 
+API_URL = ' https://api-dolar-argentina.herokuapp.com/';
+const endPointDolarBlue = 'api/dolarblue';
+
+const obtenerDatosDolar = () => {
+    fetch(API_URL + endPointDolarBlue)
+    .then((response) => response.json())
+    .then((responseData) => {console.log(responseData);
+    });
+}
+obtenerDatosDolar();  

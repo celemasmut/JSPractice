@@ -146,7 +146,6 @@ const ViejoDaveRestaurant = new Restaurant("Viejo Dave", ViejoDaveTables, ViejoD
 
 ViejoDaveRestaurant.openRestaurant(true);
 let result =0;
-debugger;
 const amountOfTablesAvailable = ViejoDaveRestaurant.tables.forEach((table) => { table.taken == false ? result++ : ''});
 if(ViejoDaveRestaurant.isOpen){
      document.write("Viejo Dave esta abierto");
