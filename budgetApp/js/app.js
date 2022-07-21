@@ -29,12 +29,9 @@ const obtenerDatosDolar = () => {
         dolarBlue = responseData.blue.value_sell;
         console.log(dolarBlue); 
         actualDolarBlue.innerHTML = formatoMoneda(dolarBlue);  
-
     });
 
-    return dolarBlue;
-}
-obtenerDatosDolar();  
+}  
 
 let totalIngresos = ()=> {
     let totalIngreso =0;
@@ -61,7 +58,7 @@ let cargarCabecero = ()=>{
     porcentaje.innerHTML = formatoPorcentaje(porcentajeEgresos);
     misIngresos.innerHTML = formatoMoneda(totalIngresos());
     misEgresos.innerHTML = formatoMoneda(totalEgresos());
-
+    obtenerDatosDolar();
 }
 
 const formatoMoneda = (valor)=> {
