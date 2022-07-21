@@ -3,6 +3,7 @@ const body = document.getElementById('body');
 const porcentaje = document.getElementById('porcentaje');
 const misIngresos = document.getElementById('ingresos');
 const misEgresos = document.getElementById('egresos');
+const actualDolarBlue = document.getElementById('dolar-blue');
 const ingresosList = document.getElementById('lista-ingresos');
 const egresosList = document.getElementById('lista-egresos');
 
@@ -17,6 +18,23 @@ let cargarApp = ()=> {
     cargarIngresos();
     cargarEgresos();
 }
+
+const API_URL = 'https://api.bluelytics.com.ar/';
+const endPointDolarBlue = 'v2/latest';
+let dolarBlue;
+const obtenerDatosDolar = () => {
+    fetch(API_URL + endPointDolarBlue)
+    .then((response) => response.json())
+    .then((responseData) => {
+        dolarBlue = responseData.blue.value_sell;
+        console.log(dolarBlue); 
+        actualDolarBlue.innerHTML = formatoMoneda(dolarBlue);  
+
+    });
+
+    return dolarBlue;
+}
+obtenerDatosDolar();  
 
 let totalIngresos = ()=> {
     let totalIngreso =0;
@@ -43,6 +61,7 @@ let cargarCabecero = ()=>{
     porcentaje.innerHTML = formatoPorcentaje(porcentajeEgresos);
     misIngresos.innerHTML = formatoMoneda(totalIngresos());
     misEgresos.innerHTML = formatoMoneda(totalEgresos());
+
 }
 
 const formatoMoneda = (valor)=> {
@@ -184,15 +203,3 @@ const agregarDato = ()=> {
         }
     }
 }
-const API_URL = 'https://api.bluelytics.com.ar/';
-const endPointDolarBlue = 'v2/latest';
-let dolarBlue = [];
-const obtenerDatosDolar = () => {
-    fetch(API_URL + endPointDolarBlue)
-    .then((response) => response.json())
-    .then((responseData) => {
-        console.log(responseData);
-        dolarBlue = responseData.blue;
-    });
-}
-obtenerDatosDolar();  

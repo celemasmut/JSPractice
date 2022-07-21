@@ -62,10 +62,11 @@ body {
 }
 
 .presupuesto_ingreso,
-.presupuesto_egreso {
+.presupuesto_egreso, .dolar_blue {
     padding: 12px;
     text-transform: uppercase;
 }
+
 
 .presupuesto_ingreso {
     margin-bottom: 10px;
@@ -76,8 +77,13 @@ body {
     background-color: #FF5049;
 }
 
+.dolar_blue{
+    margin-top: 10px;
+    background-color: #8a9fe6;
+}
+
 .presupuesto_ingreso--texto,
-.presupuesto_egreso--texto {
+.presupuesto_egreso--texto, .dolar_blue--texto {
     float: left;
     font-size: 13px;
     color: #fff;
@@ -85,7 +91,7 @@ body {
 }
 
 .presupuesto_ingreso--valor,
-.presupuesto_egreso--valor {
+.presupuesto_egreso--valor, .dolar_blue--valor{
     letter-spacing: 1px;
     float: left;
 }
